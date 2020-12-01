@@ -1,5 +1,5 @@
 server.js
-
+package-lock.json
 node_modules/*
 
 *.sql
