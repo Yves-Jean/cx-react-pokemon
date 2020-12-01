@@ -1,3 +1,5 @@
 server.js
 
 node_modules/*
+
+*.sql
