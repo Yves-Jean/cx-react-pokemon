@@ -1,13 +1,13 @@
-// Update with your config settings.
-
+let dotenv = require("dotenv");
+dotenv.config();
 module.exports = {
   development: {
-    client: "pg",
+    client: process.env.DB_CLIENT,
     connection: {
-      host: "127.0.0.1",
-      user: "postgres",
-      password: "root",
-      database: "pokedex",
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
       charset: "utf8",
     },
     migrations: {
