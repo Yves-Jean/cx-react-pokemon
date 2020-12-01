@@ -2,7 +2,7 @@
   "name": "pokedex-back",
   "version": "1.0.0",
   "description": "",
-  "main": "main.js",
+  "main": "server.js",
   "scripts": {
     "import-bdd": "knex migrate:latest && knex seed:run"
   },
