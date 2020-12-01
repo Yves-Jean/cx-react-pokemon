@@ -38,5 +38,9 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
+<<<<<<< HEAD
   return knex.schema.dropTable("pokemon").dropTable("attaques");
+=======
+  return knex.schema.dropTable("attaques").dropTable("pokemon");
+>>>>>>> origin
 };
