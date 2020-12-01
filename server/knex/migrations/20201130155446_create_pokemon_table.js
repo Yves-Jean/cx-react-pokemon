@@ -38,5 +38,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.dropTable("pokedex").dropTable("attaques");
+  return knex.schema.dropTable("pokemon").dropTable("attaques");
 };
