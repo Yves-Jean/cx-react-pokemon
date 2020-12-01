@@ -14,8 +14,10 @@ app.get("/", (req, res) => {
   res.send("Welcome on the pokedex API!");
 });
 
+//? Yves
+//* Get all pokemons
 app.get("/pokemons", (req, res) => {
-  knex
+  knex //TODO: Update query request... || join
     .select()
     .table("pokemon")
     .then(function (collection) {
@@ -31,7 +33,10 @@ app.get("/pokemons", (req, res) => {
     });
 });
 
+//? Jean
+//* Get pokemon match to id
 app.get("/pokemons/:id", (req, res) => {
+  //TODO: Update query request... || join
   knex
     .select()
     .table("pokemon")
@@ -49,7 +54,10 @@ app.get("/pokemons/:id", (req, res) => {
     });
 });
 
+//?Jean
+//* Insert all pokemons
 app.post("/pokemons", jsonParser, (req, res) => {
+  //TODO: post pokemon and post attaques
   let pokemon = {};
   for (const key in req.body) {
     if (key !== "attaques") {
@@ -75,6 +83,12 @@ app.post("/pokemons", jsonParser, (req, res) => {
       });
     });
 });
+
+//?Jean
+//TODO: request method PUT
+
+//?Yves
+//TODO: request method DELETE
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
