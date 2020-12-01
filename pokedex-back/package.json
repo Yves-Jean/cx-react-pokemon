@@ -4,8 +4,16 @@
   "description": "",
   "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "knex-migrate": "knex migrate:latest",
+    "knex-seed": "knex seed:run",
+    "knex": "npm run knex-migrate && npm run knex-seed"
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "knex": "^0.21.12",
+    "pg": "^8.5.1"
+  }
 }
