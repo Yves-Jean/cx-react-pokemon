@@ -105,13 +105,33 @@ app.post("/pokemons", jsonParser, (req, res) => {
     });
 });
 
-//?Jean
-//TODO: request method PUT
-app.put("/pokemons/:id", jsonParser, (req, res) => {});
-
 //?Yves
-//TODO: request method DELETE
+//TODO: request method PUT
 
+//?Jean
+//TODO: request method DELETE
+app.delete("/pokemons/:id", (req, res) => {
+  let id = req.params.id;
+  knex("attaques")
+    .where({ pokemon_id: id })
+    .del()
+    .then(() => {
+      return knex("pokemon")
+        .where({ numéro: id })
+        .del()
+        .then(() =>
+          res.status(200).json({ message: "Pokemon successfully deleted !" })
+        );
+    })
+    .catch(function (err) {
+      res.status(500).json({
+        error: true,
+        data: {
+          message: err.message,
+        },
+      });
+    });
+});
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
