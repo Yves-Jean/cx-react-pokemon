@@ -37,12 +37,27 @@ app.get("/pokemons", (req, res) => {
 //* Get pokemon match to id
 app.get("/pokemons/:id", (req, res) => {
   //TODO: Update query request... || join
+  let pokemon = {};
   knex
-    .select()
-    .table("pokemon")
+    .from("pokemon")
     .where({ numéro: req.params.id })
     .then(function (collection) {
-      res.json(collection);
+      pokemon = { ...collection[0] };
+    })
+    .catch(function (err) {
+      res.status(500).json({
+        error: true,
+        data: {
+          message: err.message,
+        },
+      });
+    });
+  knex
+    .from("attaques")
+    .where({ pokemon_id: req.params.id })
+    .then(function (collection) {
+      pokemon.attaques = collection;
+      res.json(pokemon);
     })
     .catch(function (err) {
       res.status(500).json({
@@ -58,20 +73,26 @@ app.get("/pokemons/:id", (req, res) => {
 //* Insert all pokemons
 app.post("/pokemons", jsonParser, (req, res) => {
   //TODO: post pokemon and post attaques
-  let pokemon = {};
-  for (const key in req.body) {
-    if (key !== "attaques") {
-      pokemon[key] = req.body[key];
-    } else {
-      pokemon[key] = JSON.stringify(req.body[key]);
-    }
-  }
+  const pokemon = [];
+  const dataAttaques = [];
+  const { attaques, ...data } = req.body;
+  pokemon.push(data);
+  attaques.forEach((att) => {
+    att.pokemon_id = data.numéro || data.numero;
+    dataAttaques.push(att);
+  });
+
   knex("pokemon")
-    .insert(pokemon)
-    .then(function (collection) {
-      res.status(200).json({
-        message: `Pokemon ${req.body.nom} created successfully!`,
-        pokemon,
+    .then(function () {
+      return knex("pokemon").insert(pokemon);
+    })
+    .then(function () {
+      return knex("attaques").insert(dataAttaques);
+    })
+    .then(() => {
+      return res.status(200).json({
+        message: `${pokemon[0].nom} has been added successfully into the pokedex!`,
+        pokemon: { ...pokemon[0], attaques: dataAttaques },
       });
     })
     .catch(function (err) {
@@ -86,6 +107,7 @@ app.post("/pokemons", jsonParser, (req, res) => {
 
 //?Jean
 //TODO: request method PUT
+app.put("/pokemons/:id", jsonParser, (req, res) => {});
 
 //?Yves
 //TODO: request method DELETE
