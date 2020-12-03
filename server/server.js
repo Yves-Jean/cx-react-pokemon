@@ -37,27 +37,24 @@ app.get("/pokemons", (req, res) => {
 //* Get pokemon match to id
 app.get("/pokemons/:id", (req, res) => {
   //TODO: Update query request... || join
-  let pokemon = {};
-  knex
-    .from("pokemon")
+  knex("pokemon")
     .where({ numéro: req.params.id })
     .then(function (collection) {
-      pokemon = { ...collection[0] };
-    })
-    .catch(function (err) {
-      res.status(500).json({
-        error: true,
-        data: {
-          message: err.message,
-        },
-      });
-    });
-  knex
-    .from("attaques")
-    .where({ pokemon_id: req.params.id })
-    .then(function (collection) {
-      pokemon.attaques = collection;
-      res.json(pokemon);
+      const pokemon = collection[0];
+      return knex("attaques")
+        .where({ pokemon_id: req.params.id })
+        .then(function (data) {
+          pokemon.attaques = data;
+          return res.json(pokemon);
+        })
+        .catch(function (err) {
+          res.status(500).json({
+            error: true,
+            data: {
+              message: err.message,
+            },
+          });
+        });
     })
     .catch(function (err) {
       res.status(500).json({
@@ -132,6 +129,7 @@ app.delete("/pokemons/:id", (req, res) => {
       });
     });
 });
+
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
 });
