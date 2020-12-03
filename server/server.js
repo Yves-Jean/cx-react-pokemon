@@ -2,6 +2,8 @@ const express = require("express");
 const PORT = process.argv[2] || 3001;
 const knex = require("./knex/knex");
 const bodyParser = require("body-parser");
+const Provider = require("./PokemonsProvider");
+
 let cors = require("cors");
 const app = express();
 let jsonParser = bodyParser.json();
@@ -17,18 +19,15 @@ app.get("/", (req, res) => {
 //? Yves
 //* Get all pokemons
 app.get("/pokemons", (req, res) => {
-  knex //TODO: Update query request... || join
-    .select()
-    .table("pokemon")
-    .then(function (collection) {
-      res.json(collection);
+  Provider.getAllPokemons()
+    .then((results) => {
+      console.log(results);
+      res.json(results);
     })
     .catch(function (err) {
       res.status(500).json({
         error: true,
-        data: {
-          message: err.message,
-        },
+        message: err.message,
       });
     });
 });
