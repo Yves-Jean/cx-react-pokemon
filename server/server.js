@@ -36,12 +36,24 @@ app.get("/pokemons", (req, res) => {
 //* Get pokemon match to id
 app.get("/pokemons/:id", (req, res) => {
   //TODO: Update query request... || join
-  knex
-    .select()
-    .table("pokemon")
+  knex("pokemon")
     .where({ numéro: req.params.id })
     .then(function (collection) {
-      res.json(collection);
+      const pokemon = collection[0];
+      return knex("attaques")
+        .where({ pokemon_id: req.params.id })
+        .then(function (data) {
+          pokemon.attaques = data;
+          return res.json(pokemon);
+        })
+        .catch(function (err) {
+          res.status(500).json({
+            error: true,
+            data: {
+              message: err.message,
+            },
+          });
+        });
     })
     .catch(function (err) {
       res.status(500).json({
@@ -57,20 +69,26 @@ app.get("/pokemons/:id", (req, res) => {
 //* Insert all pokemons
 app.post("/pokemons", jsonParser, (req, res) => {
   //TODO: post pokemon and post attaques
-  let pokemon = {};
-  for (const key in req.body) {
-    if (key !== "attaques") {
-      pokemon[key] = req.body[key];
-    } else {
-      pokemon[key] = JSON.stringify(req.body[key]);
-    }
-  }
+  const pokemon = [];
+  const dataAttaques = [];
+  const { attaques, ...data } = req.body;
+  pokemon.push(data);
+  attaques.forEach((att) => {
+    att.pokemon_id = data.numéro || data.numero;
+    dataAttaques.push(att);
+  });
+
   knex("pokemon")
-    .insert(pokemon)
-    .then(function (collection) {
-      res.status(200).json({
-        message: `Pokemon ${req.body.nom} created successfully!`,
-        pokemon,
+    .then(function () {
+      return knex("pokemon").insert(pokemon);
+    })
+    .then(function () {
+      return knex("attaques").insert(dataAttaques);
+    })
+    .then(() => {
+      return res.status(200).json({
+        message: `${pokemon[0].nom} has been added successfully into the pokedex!`,
+        pokemon: { ...pokemon[0], attaques: dataAttaques },
       });
     })
     .catch(function (err) {
@@ -83,11 +101,33 @@ app.post("/pokemons", jsonParser, (req, res) => {
     });
 });
 
-//?Jean
+//?Yves
 //TODO: request method PUT
 
-//?Yves
+//?Jean
 //TODO: request method DELETE
+app.delete("/pokemons/:id", (req, res) => {
+  let id = req.params.id;
+  knex("attaques")
+    .where({ pokemon_id: id })
+    .del()
+    .then(() => {
+      return knex("pokemon")
+        .where({ numéro: id })
+        .del()
+        .then(() =>
+          res.status(200).json({ message: "Pokemon successfully deleted !" })
+        );
+    })
+    .catch(function (err) {
+      res.status(500).json({
+        error: true,
+        data: {
+          message: err.message,
+        },
+      });
+    });
+});
 
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
