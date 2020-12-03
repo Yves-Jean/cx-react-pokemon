@@ -21,7 +21,6 @@ app.get("/", (req, res) => {
 app.get("/pokemons", (req, res) => {
   Provider.getAllPokemons()
     .then((results) => {
-      console.log(results);
       res.json(results);
     })
     .catch(function (err) {
