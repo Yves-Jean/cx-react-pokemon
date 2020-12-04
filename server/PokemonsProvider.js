@@ -8,7 +8,7 @@ const PokemonsProvider = {
       .groupBy("pokemon.numéro", "pokemon.nom")
       .orderBy("pokemon.numéro", "asc");
   },
-  async getAttaques(id) {
+  getAttaques(id) {
     return knex.select().from("attaques").where("pokemon_id", id);
   },
 };
