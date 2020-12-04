@@ -1,0 +1,40 @@
+.container {
+  max-width: 1400px;
+  padding: 2rem;
+  margin: auto;
+}
+
+.btn {
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 3px;
+  &-pink {
+    background: #eb4d4b;
+    color: var(--white);
+  }
+}
+
+.display-flex {
+  display: flex;
+}
+
+.flex {
+  &-wrap {
+    flex-wrap: wrap;
+  }
+  &-nowrap {
+    flex-wrap: nowrap;
+  }
+
+  &-justify {
+    &-center {
+      justify-content: center;
+    }
+    &-start {
+      justify-content: flex-start;
+    }
+    &-end {
+      justify-content: flex-end;
+    }
+  }
+}
