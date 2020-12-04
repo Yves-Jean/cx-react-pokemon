@@ -1,19 +1,24 @@
+//? Container
 .container {
   max-width: 1400px;
-  padding: 2rem;
+  padding: 0 2rem;
   margin: auto;
 }
 
+//? Button
 .btn {
   padding: 1rem 2rem;
   border: none;
   border-radius: 3px;
+  outline: none;
+  cursor: pointer;
   &-pink {
     background: #eb4d4b;
     color: var(--white);
   }
 }
 
+//? Flex
 .display-flex {
   display: flex;
 }
@@ -35,6 +40,22 @@
     }
     &-end {
       justify-content: flex-end;
+    }
+  }
+}
+
+//? Padding
+.pd {
+  @for $var from 0 to 4 {
+    &-#{$var} {
+      padding: #{$var}rem;
+    }
+    &-x-#{$var} {
+      padding: 0 #{$var}rem;
+    }
+
+    &-y-#{$var} {
+      padding: #{$var}rem 0;
     }
   }
 }
