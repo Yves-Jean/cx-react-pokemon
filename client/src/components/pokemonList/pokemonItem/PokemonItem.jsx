@@ -6,7 +6,7 @@ const PokemonItem = () => {
     <div className="card">
       <div className="card-header">
         <img
-          src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png"
+          src="https://assets.pokemon.com/assets/cms2/img/pokedex/detail/002.png"
           alt="pokemon"
         />
       </div>

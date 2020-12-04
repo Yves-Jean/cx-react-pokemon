@@ -6,8 +6,16 @@
   min-height: 250px;
   border-radius: 8px;
   box-shadow: 2px 2px 8px rgba($color: #000000, $alpha: 0.2);
+  cursor: pointer;
 
   &-header {
+    transition: transform 350ms ease-in-out;
+  }
+
+  &:hover {
+    .card-header {
+      transform: scale(1.2);
+    }
   }
 
   &-body {
