@@ -58,3 +58,9 @@ a {
 ul {
   list-style: none;
 }
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
