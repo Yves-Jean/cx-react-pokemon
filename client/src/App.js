@@ -22,7 +22,7 @@ export default function App() {
             <NotFound />
           </Route>
         </Switch>
-        <Footer />
+        {/* <Footer /> */}
       </Router>
     </ThemeContext.Provider>
   );

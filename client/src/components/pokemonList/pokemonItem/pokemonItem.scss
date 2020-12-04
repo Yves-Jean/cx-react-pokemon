@@ -1,0 +1,15 @@
+.card {
+  padding: 2rem;
+  margin: 1rem;
+  width: 200px;
+  min-width: 200px;
+  min-height: 250px;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba($color: #000000, $alpha: 0.2);
+
+  &-header {
+  }
+
+  &-body {
+  }
+}
