@@ -2,6 +2,8 @@ const express = require("express");
 const PORT = process.argv[2] || 3001;
 const knex = require("./knex/knex");
 const bodyParser = require("body-parser");
+const Provider = require("./PokemonsProvider");
+
 let cors = require("cors");
 const app = express();
 let jsonParser = bodyParser.json();
@@ -17,18 +19,14 @@ app.get("/", (req, res) => {
 //? Yves
 //* Get all pokemons
 app.get("/pokemons", (req, res) => {
-  knex //TODO: Update query request... || join
-    .select()
-    .table("pokemon")
-    .then(function (collection) {
-      res.json(collection);
+  Provider.getAllPokemons()
+    .then((results) => {
+      res.json(results);
     })
     .catch(function (err) {
       res.status(500).json({
         error: true,
-        data: {
-          message: err.message,
-        },
+        message: err.message,
       });
     });
 });
@@ -104,6 +102,30 @@ app.post("/pokemons", jsonParser, (req, res) => {
 
 //?Yves
 //TODO: request method PUT
+app.put("/pokemons/:id", jsonParser, (req, res) => {
+  //TODO: post pokemon and post attaques
+  const dataAttaques = [];
+  const { attaques, ...pokemon } = req.body;
+
+  knex("pokemon")
+    .then(function () {
+      return knex("pokemon").update(pokemon).where("numéro", req.params.id);
+    })
+    .then(() => {
+      return res.status(200).json({
+        message: `${pokemon.nom} has been added successfully into the pokedex!`,
+        pokemon: { ...pokemon, attaques: dataAttaques },
+      });
+    })
+    .catch(function (err) {
+      res.status(500).json({
+        error: true,
+        data: {
+          message: err.message,
+        },
+      });
+    });
+});
 
 //?Jean
 //TODO: request method DELETE
