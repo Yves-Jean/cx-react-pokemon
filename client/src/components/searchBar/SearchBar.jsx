@@ -8,7 +8,7 @@ const SearchBar = () => {
     <div className="search">
       <input placeholder="Search Pokemon" type="text" name="search" />
       <button>
-        <img src={searchIcon} alt="Search" class="search-icon" />
+        <img src={searchIcon} alt="Search" className="search-icon" />
       </button>
     </div>
   );
