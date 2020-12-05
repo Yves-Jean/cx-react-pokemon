@@ -1,0 +1,23 @@
+.card {
+  padding: 2rem;
+  margin: 1rem;
+  width: 200px;
+  min-width: 200px;
+  min-height: 250px;
+  border-radius: 8px;
+  box-shadow: var(--box-shadow);
+  cursor: pointer;
+
+  &-header {
+    transition: transform 350ms ease-in-out;
+  }
+
+  &:hover {
+    .card-header {
+      transform: scale(1.2);
+    }
+  }
+
+  &-body {
+  }
+}

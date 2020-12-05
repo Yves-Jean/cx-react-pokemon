@@ -16,8 +16,7 @@ app.get("/", (req, res) => {
   res.send("Welcome on the pokedex API!");
 });
 
-//? Yves
-//* Get all pokemons
+// Get all pokemons and project abstarct information {name, numero, numero}
 app.get("/pokemons", (req, res) => {
   Provider.getAllPokemons()
     .then((results) => {
@@ -31,41 +30,21 @@ app.get("/pokemons", (req, res) => {
     });
 });
 
-//? Jean
-//* Get pokemon match to id
+// Get pokemon match to id
 app.get("/pokemons/:id", (req, res) => {
-  //TODO: Update query request... || join
-  knex("pokemon")
-    .where({ numéro: req.params.id })
-    .then(function (collection) {
-      const pokemon = collection[0];
-      return knex("attaques")
-        .where({ pokemon_id: req.params.id })
-        .then(function (data) {
-          pokemon.attaques = data;
-          return res.json(pokemon);
-        })
-        .catch(function (err) {
-          res.status(500).json({
-            error: true,
-            data: {
-              message: err.message,
-            },
-          });
-        });
+  Provider.getPokemon(req.params.id)
+    .then((results) => {
+      res.json(results);
     })
     .catch(function (err) {
       res.status(500).json({
         error: true,
-        data: {
-          message: err.message,
-        },
+        message: err.message,
       });
     });
 });
 
-//?Jean
-//* Insert all pokemons
+//* Insert pokemons
 app.post("/pokemons", jsonParser, (req, res) => {
   //TODO: post pokemon and post attaques
   const pokemon = [];
@@ -100,8 +79,7 @@ app.post("/pokemons", jsonParser, (req, res) => {
     });
 });
 
-//?Yves
-//TODO: request method PUT
+//* Update pokemons
 app.put("/pokemons/:id", jsonParser, (req, res) => {
   //TODO: post pokemon and post attaques
   const dataAttaques = [];
@@ -127,8 +105,7 @@ app.put("/pokemons/:id", jsonParser, (req, res) => {
     });
 });
 
-//?Jean
-//TODO: request method DELETE
+//* Delete pokemons
 app.delete("/pokemons/:id", (req, res) => {
   let id = req.params.id;
   knex("attaques")
