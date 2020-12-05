@@ -10,7 +10,9 @@ const PokemonsProvider = {
   },
 
   getAllPokemons() {
-    return knex("pokemon").select(["numéro", "nom", "numero"]);
+    return knex("pokemon")
+      .select(["numéro", "nom", "numero"])
+      .orderBy("pokemon.numéro", "asc");
   },
 
   getPokemon(id) {
