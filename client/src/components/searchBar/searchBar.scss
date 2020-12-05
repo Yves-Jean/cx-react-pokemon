@@ -1,0 +1,20 @@
+.search {
+  width: 70%;
+  max-width: 900px;
+  display: flex;
+  flex-flow: row nowrap;
+  box-shadow: var(--box-shadow);
+  border-radius: 16.5px;
+  input {
+    width: 100%;
+    padding: 1.5rem 1rem;
+    background: none;
+    border: none;
+    outline: none;
+    color: var(--white);
+  }
+
+  button {
+    display: none; //TODO: Design btn search
+  }
+}
