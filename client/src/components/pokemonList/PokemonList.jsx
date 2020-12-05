@@ -7,7 +7,7 @@ const PokemonList = () => {
 
   useEffect(() => {
     console.log("use effet");
-    fetch("http://localhost:3001/pokemons")
+    fetch("http://localhost:3001/pokemons") //? Crate a file api config ao set a url api
       .then((res) => res.json())
       .then((data) => {
         setPokemons(data);
