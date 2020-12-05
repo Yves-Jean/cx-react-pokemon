@@ -6,7 +6,7 @@ import PokemonList from "../pokemonList/PokemonList";
 
 import logo from "../../assets/images/logo.svg"; //! Change logo to logo pokedex
 
-const Home = () => {
+const Home = ({ theme }) => {
   return (
     <main className="container">
       <div className="display-flex flex-d-col flex-align-center mg-y-4">
