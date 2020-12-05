@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 //? Yves
-//* Get all pokemons
+//* Get all pokemons and project abstarct information {name, numero, numero}
 app.get("/pokemons", (req, res) => {
   Provider.getAllPokemons()
     .then((results) => {
