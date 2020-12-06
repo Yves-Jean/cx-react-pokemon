@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./pokemonList.scss";
 import PokemonItem from "./pokemonItem/PokemonItem";
+import { getAllPokemons } from "../../services/pokemon.service";
 
 const PokemonList = () => {
   const [pokemons, setPokemons] = useState([]);
 
   useEffect(() => {
-    console.log("use effet");
-    fetch("http://localhost:3001/pokemons") //? Crate a file api config ao set a url api
-      .then((res) => res.json())
+    getAllPokemons()
       .then((data) => {
         setPokemons(data);
       })

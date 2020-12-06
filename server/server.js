@@ -43,6 +43,19 @@ app.get("/pokemons/:id", (req, res) => {
       });
     });
 });
+// Get attack match to id
+app.get("/attacks/:id", (req, res) => {
+  Provider.getAttaques(req.params.id)
+    .then((results) => {
+      res.json(results);
+    })
+    .catch(function (err) {
+      res.status(500).json({
+        error: true,
+        message: err.message,
+      });
+    });
+});
 
 //* Insert pokemons
 app.post("/pokemons", jsonParser, (req, res) => {
