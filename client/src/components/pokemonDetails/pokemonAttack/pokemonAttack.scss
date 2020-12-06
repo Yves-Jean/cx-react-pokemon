@@ -1,17 +1,10 @@
-@import "../../../scss/style.scss";
-
 .attaques {
   padding: 2em 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   gap: 2rem;
-  &-dark {
-    border-top: 1px solid white;
-  }
-  &-light {
-    border-top: 1px solid black;
-  }
+
   &-item {
     box-shadow: var(--box-shadow);
     padding: 2rem;
@@ -32,6 +25,19 @@
     .value {
       position: absolute;
       left: 50%;
+    }
+  }
+}
+
+.theme {
+  &-dark {
+    .attaques {
+      border-top: 1px solid white;
+    }
+  }
+  &-light {
+    .attaques {
+      border-top: 1px solid black;
     }
   }
 }

@@ -6,12 +6,6 @@
   grid-template-rows: auto;
   column-gap: 2rem;
   row-gap: 1rem;
-  &-dark {
-    border-top: 1px solid white;
-  }
-  &-light {
-    border-top: 1px solid black;
-  }
 }
 .identity-item {
   display: flex;
@@ -20,18 +14,26 @@
   width: 100%;
   text-align: left;
   overflow: hidden;
+  box-shadow: var(--box-shadow);
+}
 
-  &-dark {
-    box-shadow: var(--box-shadow);
-    background: rgba(255, 255, 255, 0.1);
-  }
-  &-light {
-    box-shadow: var(--box-shadow);
-  }
-}
-.identity-item .key {
-}
 .identity-item .value {
   position: absolute;
   left: 50%;
+}
+
+.theme {
+  &-dark {
+    .identity {
+      border-top: 1px solid white;
+    }
+    .identity-item {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  &-light {
+    .identity {
+      border-top: 1px solid black;
+    }
+  }
 }

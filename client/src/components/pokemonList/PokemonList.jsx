@@ -31,9 +31,7 @@ const PokemonList = () => {
     <FilterContext.Provider value={[setFilterResult, setfilterState, pokemons]}>
       <SearchBar />
       <div className="pokemon-list display-flex flex-wrap flex-justify-center mg-tp-4">
-        {filterState > 0
-          ? displayPokemon(filterResult)
-          : displayPokemon(pokemons)}
+        {filterState ? displayPokemon(filterResult) : displayPokemon(pokemons)}
       </div>
     </FilterContext.Provider>
   );
