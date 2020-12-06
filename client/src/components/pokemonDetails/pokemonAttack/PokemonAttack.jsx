@@ -1,26 +1,29 @@
-// import React from "react";
+import React from "react";
+import "./pokemonAttack.scss";
 
-// const PokemonAttack = ({ attaques }) => {
-//   console.log(attaques);
-//   return (
-//     <div className="container">
-//       <h2>Attacks</h2>
-//       <div className="attaques">
-//         {Object.keys(attaques).map((key, i) => {
-//           if (attaques[key]) {
-//             return (
-//               <div className="attaques-item">
-//                 <div className="key">{key}</div>
-//                 <div className="value">{attaques[key]}</div>
-//               </div>
-//             );
-//           }
-//           return;
-//         })}
-//       </div>
-//       ;
-//     </div>
-//   );
-// };
+const PokemonAttack = ({ attaques }) => {
+  console.log(attaques);
+  return (
+    <div className="container mg-y-4">
+      <h2>Attacks</h2>
+      <div className="attaques">
+        {attaques.map((attaque) => (
+          <div className="attaques-item" key={attaque.attaques_id}>
+            {Object.keys(attaque).map((key, i) => {
+              if (key !== "attaques_id" && key !== "pokemon_id") {
+                return (
+                  <div className="attaques-content" key={i}>
+                    <div className="key">{key}</div>
+                    <div className="value">{attaque[key]}</div>
+                  </div>
+                );
+              }
+            })}
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+};
 
-// export default PokemonAttack;
+export default PokemonAttack;
