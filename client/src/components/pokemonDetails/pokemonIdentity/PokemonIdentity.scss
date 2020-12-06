@@ -4,7 +4,8 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
-  gap: 1rem;
+  column-gap: 2rem;
+  row-gap: 1rem;
 }
 .identity-item {
   display: flex;

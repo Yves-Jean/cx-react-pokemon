@@ -6,19 +6,20 @@ import {
 import { Link, useHistory, useParams } from "react-router-dom";
 
 import PokemonIdentity from "./pokemonIdentity/PokemonIdentity";
-// import PokemonAttack from "./pokemonAttack/PokemonAttack";
+import PokemonAttack from "./pokemonAttack/PokemonAttack";
 import "./pokemonDetails.scss";
 
 const PokemonDetails = () => {
   let { id } = useParams();
   let pokemon_image = `https://assets.pokemon.com/assets/cms2/img/pokedex/detail/${id}.png`;
-  const [pokemon, setPokemon] = useState({});
+  const [pokemon, setPokemon] = useState({ attaques: [] });
   const { attaques, ...pokemonIdentity } = pokemon;
   let history = useHistory();
 
   useEffect(() => {
     getPokemonById(id).then((res) => setPokemon(res[0]));
   }, [id]);
+
   const deletePokemon = () => {
     return deletePokemonById(id).then(() => history.push("/"));
   };
@@ -45,7 +46,7 @@ const PokemonDetails = () => {
         </div>
       </div>
       <PokemonIdentity pokemonIndentity={pokemonIdentity} />
-      {/* <PokemonAttack attaques={attaques} /> */}
+      <PokemonAttack attaques={attaques} />
     </main>
   );
 };

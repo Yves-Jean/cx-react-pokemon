@@ -1,0 +1,27 @@
+.attaques {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 2rem;
+
+  &-item {
+    box-shadow: var(--box-shadow);
+    padding: 2rem;
+  }
+
+  &-content {
+    display: flex;
+    flex-flow: row nowrap;
+    padding-bottom: 1rem;
+    position: relative;
+
+    &:last-child {
+      padding-bottom: 0;
+    }
+
+    .value {
+      position: absolute;
+      left: 50%;
+    }
+  }
+}
