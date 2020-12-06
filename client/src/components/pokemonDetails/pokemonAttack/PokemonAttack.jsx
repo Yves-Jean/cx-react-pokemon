@@ -2,22 +2,19 @@ import React from "react";
 import "./pokemonAttack.scss";
 
 const PokemonAttack = ({ attaques }) => {
-  console.log(attaques);
   return (
     <div className="container mg-y-4">
       <h2>Attacks</h2>
       <div className="attaques">
-        {attaques.map((attaque) => (
-          <div className="attaques-item" key={attaque.attaques_id}>
+        {attaques.map(({ attaques_id, pokemon_id, ...attaque }) => (
+          <div className="attaques-item" key={attaques_id + pokemon_id}>
             {Object.keys(attaque).map((key, i) => {
-              if (key !== "attaques_id" && key !== "pokemon_id") {
-                return (
-                  <div className="attaques-content" key={i}>
-                    <div className="key">{key}</div>
-                    <div className="value">{attaque[key]}</div>
-                  </div>
-                );
-              }
+              return (
+                <div className="attaques-content" key={pokemon_id + i}>
+                  <div className="key">{key}</div>
+                  <div className="value">{attaque[key]}</div>
+                </div>
+              );
             })}
           </div>
         ))}
