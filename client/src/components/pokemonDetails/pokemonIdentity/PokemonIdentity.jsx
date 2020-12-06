@@ -5,7 +5,7 @@ const PokemonIdentity = ({ pokemonIndentity }) => {
   return (
     <div className="container">
       <h2>Identity</h2>
-      <div className="identity ">
+      <div className="identity">
         {Object.keys(pokemonIndentity).map((key, i) => {
           if (pokemonIndentity[key]) {
             return (

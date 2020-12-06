@@ -1,9 +1,6 @@
 .footer {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background: #1a0000;
+  background: var(--background-drak);
   color: rgba(255, 255, 255, 0.623);
-  padding: 0.1em 1em;
+  padding: 1em 1em;
+  box-shadow: 10px 0 10px rgba(0, 0, 0, 0.418);
 }

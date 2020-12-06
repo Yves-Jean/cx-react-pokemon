@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   getPokemonById,
   deletePokemonById,
 } from "../../services/pokemon.service";
 import { Link, useHistory, useParams } from "react-router-dom";
-
 import PokemonIdentity from "./pokemonIdentity/PokemonIdentity";
 import PokemonAttack from "./pokemonAttack/PokemonAttack";
 import "./pokemonDetails.scss";
+import { ThemeContext } from "../../contexts/ThemeContext";
 
 const PokemonDetails = () => {
   let { id } = useParams();
@@ -15,6 +15,7 @@ const PokemonDetails = () => {
   const [pokemon, setPokemon] = useState({ attaques: [] });
   const { attaques, ...pokemonIdentity } = pokemon;
   let history = useHistory();
+  const [theme, setTheme] = useContext(ThemeContext);
 
   useEffect(() => {
     getPokemonById(id).then((res) => setPokemon(res[0]));
@@ -26,8 +27,17 @@ const PokemonDetails = () => {
 
   return (
     <main className="container">
-      <div className="header-details">
-        <Link to="/" className="return-arrow"></Link>
+      <div className="container header-details">
+        <Link to="/" className="return-arrow">
+          <span
+            style={{
+              fontSize: "3em",
+              color: theme === "light" ? "black" : "white",
+            }}
+          >
+            <i class="fas fa-arrow-left"></i>
+          </span>
+        </Link>
         <h1>
           #{id} {pokemon.nom}
         </h1>
@@ -39,7 +49,6 @@ const PokemonDetails = () => {
       </div>
       <div className="container">
         <div className="edit-pokemon">
-          <button className="btn btn-blue">Edit</button>
           <button onClick={deletePokemon} className="btn btn-pink">
             Delete
           </button>

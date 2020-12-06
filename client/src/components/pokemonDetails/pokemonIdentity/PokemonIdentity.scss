@@ -1,6 +1,6 @@
 .identity {
   border-top: 1px solid white;
-  padding: 1em 0;
+  padding: 2em 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto;
@@ -13,12 +13,28 @@
   padding: 1em 2em;
   width: 100%;
   text-align: left;
-  box-shadow: var(--box-shadow);
   overflow: hidden;
+  box-shadow: var(--box-shadow);
 }
 .identity-item .key {
 }
 .identity-item .value {
   position: absolute;
   left: 50%;
+}
+
+.theme {
+  &-dark {
+    .identity {
+      border-top: 1px solid white;
+    }
+    .identity-item {
+      background: rgba(255, 255, 255, 0.1);
+    }
+  }
+  &-light {
+    .identity {
+      border-top: 1px solid black;
+    }
+  }
 }
