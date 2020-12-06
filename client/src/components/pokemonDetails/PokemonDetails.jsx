@@ -8,6 +8,7 @@ import PokemonIdentity from "./pokemonIdentity/PokemonIdentity";
 import PokemonAttack from "./pokemonAttack/PokemonAttack";
 import "./pokemonDetails.scss";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import Modal from "react-modal";
 
 const PokemonDetails = () => {
   let { id } = useParams();
@@ -16,7 +17,36 @@ const PokemonDetails = () => {
   const { attaques, ...pokemonIdentity } = pokemon;
   let history = useHistory();
   const [theme, setTheme] = useContext(ThemeContext);
+  const [modalIsOpen, setIsOpen] = useState(false);
 
+  const modalStyles = {
+    content: {
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+      height: "300px",
+      display: "flex",
+      justifyContent: "center",
+      alignItmes: "center",
+      flexDirection: "column",
+      padding: "50px",
+      textAlign: "center",
+      background:
+        theme === "dark" ? "var(--background-drak)" : "var(--background-light)",
+    },
+  };
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+  const afterOpenModal = () => {
+    // references are now sync'd and can be accessed.
+  };
   useEffect(() => {
     getPokemonById(id).then((res) => setPokemon(res[0]));
   }, [id]);
@@ -49,13 +79,31 @@ const PokemonDetails = () => {
       </div>
       <div className="container">
         <div className="edit-pokemon">
-          <button onClick={deletePokemon} className="btn btn-pink">
+          <button onClick={openModal} className="btn btn-pink">
             Delete
           </button>
         </div>
       </div>
       <PokemonIdentity pokemonIndentity={pokemonIdentity} />
       <PokemonAttack attaques={attaques} />
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={modalStyles}
+        contentLabel="Example Modal"
+      >
+        <h3>Are you sure to delete this pokemon ?</h3>
+
+        <div className="btns">
+          <button className="btn btn-blue mg-r-4" onClick={closeModal}>
+            Cancel
+          </button>
+          <button onClick={deletePokemon} className="btn btn-pink">
+            Delete
+          </button>
+        </div>
+      </Modal>
     </main>
   );
 };

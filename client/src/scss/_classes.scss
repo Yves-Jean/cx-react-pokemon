@@ -99,5 +99,8 @@
     &-tp-#{$var} {
       margin-top: #{$var}rem;
     }
+    &-r-#{$var} {
+      margin-right: #{$var}rem;
+    }
   }
 }

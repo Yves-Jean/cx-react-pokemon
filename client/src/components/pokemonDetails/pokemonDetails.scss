@@ -10,7 +10,11 @@ main {
     display: flex;
     margin-bottom: 50px;
     justify-content: space-between;
-    max-width: 150px;
+    width: 100%;
+  }
+  .btns {
+    display: flex;
+    flex-direction: column;
   }
   .pokemon_image {
     position: absolute;
