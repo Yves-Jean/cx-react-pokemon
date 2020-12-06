@@ -3,8 +3,8 @@ import "./footer.scss";
 
 const Footer = () => {
   return (
-    <div className="footer">
-      <p>Developed by Yves KOUAYIP & Jean PORCHER.</p>
+    <div className="footer ">
+      <p>ctx react pokedex - Yves KOUAYIP | Jean PORCHER</p>
     </div>
   );
 };

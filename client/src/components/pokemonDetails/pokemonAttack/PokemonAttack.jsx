@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./pokemonAttack.scss";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 
 const PokemonAttack = ({ attaques }) => {
-  console.log(attaques);
+  const [theme, setTheme] = useContext(ThemeContext);
+
   return (
     <div className="container mg-y-4">
       <h2>Attacks</h2>
-      <div className="attaques">
+      <div
+        className={`attaques ${
+          theme === "dark" ? "attaques-dark" : "attaques-light"
+        }`}
+      >
         {attaques.map((attaque) => (
           <div className="attaques-item" key={attaque.attaques_id}>
             {Object.keys(attaque).map((key, i) => {

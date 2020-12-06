@@ -1,12 +1,22 @@
+@import "../../../scss/style.scss";
+
 .attaques {
+  padding: 2em 0;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
   gap: 2rem;
-
+  &-dark {
+    border-top: 1px solid white;
+  }
+  &-light {
+    border-top: 1px solid black;
+  }
   &-item {
     box-shadow: var(--box-shadow);
     padding: 2rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
   }
 
   &-content {

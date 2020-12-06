@@ -1,4 +1,4 @@
-import { Home, NotFound, PokemonDetails, Toolbar } from "./components";
+import { Footer, Home, NotFound, PokemonDetails, Toolbar } from "./components";
 import React, { useState } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { ThemeContext } from "./contexts/ThemeContext";
@@ -23,7 +23,7 @@ export default function App() {
             <NotFound />
           </Route>
         </Switch>
-        {/* {<Footer />} */}
+        <Footer />
       </Router>
     </ThemeContext.Provider>
   );
